@@ -5,7 +5,6 @@ import com.redeban.json_repository.business.dto.Depot;
 import com.redeban.json_repository.dao.crud.RepositoryCrud;
 import com.redeban.json_repository.dao.models.JsonRepository;
 import com.redeban.json_repository.mapper.DepotMapper;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,16 +14,19 @@ public class RepositoryServiceImpl implements RepositoryService {
     @Autowired
     private RepositoryCrud repositoryCrud;
 
+    @Autowired
+    DepotMapper depotMapper;
+
     @Override
     public Depot createDepot(Depot depot) {
         if(depot == null){
             return null;
         }
-        JsonRepository jsonRepository = DepotMapper.getJsonRepository(depot);
+        JsonRepository jsonRepository = depotMapper.getJsonRepository(depot);
         JsonRepository jsonRepositorySaved = new JsonRepository();
 
         jsonRepositorySaved=repositoryCrud.save(jsonRepository);
 
-        return DepotMapper.getDepot(jsonRepositorySaved);
+        return depotMapper.getDepot(jsonRepositorySaved);
     }
 }

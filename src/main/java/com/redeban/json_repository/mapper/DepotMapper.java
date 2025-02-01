@@ -4,12 +4,13 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.redeban.json_repository.business.dto.Depot;
 import com.redeban.json_repository.dao.models.JsonRepository;
+import org.springframework.stereotype.Component;
 
 
-
+@Component
 public class DepotMapper {
 
-    public static Depot getDepot(JsonRepository jsonRepository) {
+    public Depot getDepot(JsonRepository jsonRepository) {
         Depot depot = new Depot();
         depot.setId(jsonRepository.getId());
         depot.setDate(jsonRepository.getDate());
@@ -22,7 +23,7 @@ public class DepotMapper {
         return depot;
     }
 
-    public static JsonRepository getJsonRepository(Depot depot) {
+    public JsonRepository getJsonRepository(Depot depot) {
         JsonRepository jsonRepository = new JsonRepository();
         jsonRepository.setId(depot.getId());
         jsonRepository.setDate(depot.getDate());
