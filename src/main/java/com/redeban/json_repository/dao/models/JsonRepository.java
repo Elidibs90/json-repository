@@ -5,6 +5,7 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 
 @Entity
 @Table(name = "repository")
@@ -14,11 +15,11 @@ public class JsonRepository {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    private LocalDateTime fecha;
+    private LocalDateTime date;
 
     @Column(name = "json_information")
     @JdbcTypeCode(SqlTypes.JSON)
-    private MyJson jsonProperty;
+    private Map<String, Integer> jsonProperty;
 
     public Integer getId() {
         return id;
@@ -28,19 +29,19 @@ public class JsonRepository {
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
-        return fecha;
+    public LocalDateTime getDate() {
+        return date;
     }
 
-    public void setFecha(LocalDateTime fecha) {
-        this.fecha = fecha;
+    public void setDate(LocalDateTime fecha) {
+        this.date = fecha;
     }
 
-    public MyJson getJsonProperty() {
+    public Map<String, Integer> getJsonProperty() {
         return jsonProperty;
     }
 
-    public void setJsonProperty(MyJson jsonProperty) {
+    public void setJsonProperty(Map<String, Integer> jsonProperty) {
         this.jsonProperty = jsonProperty;
     }
 }
