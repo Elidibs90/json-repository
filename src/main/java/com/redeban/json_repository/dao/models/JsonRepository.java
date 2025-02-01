@@ -1,47 +1,73 @@
 package com.redeban.json_repository.dao.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.google.gson.JsonObject;
 import jakarta.persistence.*;
+
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.time.LocalDateTime;
-import java.util.Map;
+
+import java.util.Date;
 
 @Entity
 @Table(name = "repository")
 public class JsonRepository {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
 
-    private LocalDateTime date;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(name = "fecha")
+    private Date date;
 
     @Column(name = "json_information")
     @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Integer> jsonProperty;
+    private JsonObject jsonProperty;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime fecha) {
+    public void setDate(Date fecha) {
         this.date = fecha;
     }
 
-    public Map<String, Integer> getJsonProperty() {
+    public JsonObject getJsonProperty() {
         return jsonProperty;
     }
 
-    public void setJsonProperty(Map<String, Integer> jsonProperty) {
-        this.jsonProperty = jsonProperty;
+    public void setJsonProperty(JsonObject jsonProperty) {
+            this.jsonProperty = jsonProperty;
+
     }
+
+
+    public boolean isValid(String json) {
+        try {
+            new JSONObject(json);
+        } catch (JSONException e) {
+            try {
+                new JSONArray(json);
+            } catch (JSONException ne) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
 }

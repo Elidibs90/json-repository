@@ -1,10 +1,11 @@
 package com.redeban.json_repository.mapper;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.redeban.json_repository.business.dto.Depot;
 import com.redeban.json_repository.dao.models.JsonRepository;
 
-import java.util.HashMap;
-import java.util.Map;
+
 
 public class DepotMapper {
 
@@ -12,9 +13,12 @@ public class DepotMapper {
         Depot depot = new Depot();
         depot.setId(jsonRepository.getId());
         depot.setDate(jsonRepository.getDate());
-        Map<String,Integer> map = new HashMap<>();
-        jsonRepository.getJsonProperty().putAll(map);
-        depot.setJson(map);
+        String jsonBody = new Gson().toJson(jsonRepository.getJsonProperty());
+        if(jsonRepository.isValid(jsonBody)){
+            depot.setJson(jsonBody);
+        }else{
+            depot.setJson(null);
+        }
         return depot;
     }
 
@@ -22,9 +26,13 @@ public class DepotMapper {
         JsonRepository jsonRepository = new JsonRepository();
         jsonRepository.setId(depot.getId());
         jsonRepository.setDate(depot.getDate());
-        Map<String,Integer> map = new HashMap<>();
-        depot.getJson().putAll(map);
-        jsonRepository.setJsonProperty(map);
+        /*if(jsonRepository.isValid(depot.getJson())){
+            JsonObject jsonObject= new Gson().fromJson(depot.getJson(), JsonObject.class);
+            jsonRepository.setJsonProperty(jsonObject);
+        }else{
+            jsonRepository.setJsonProperty(new JsonObject());
+        }*/
+
         return jsonRepository;
     }
 }

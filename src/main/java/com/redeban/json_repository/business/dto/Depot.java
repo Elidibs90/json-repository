@@ -1,37 +1,36 @@
 package com.redeban.json_repository.business.dto;
 
-import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.Date;
 
 public class Depot {
 
-    private int id;
+    private Long id;
 
-    private LocalDateTime date;
+    private Date date;
 
-    private Map<String, Integer> json;
+    private String json;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public LocalDateTime getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
-    public Map<String, Integer> getJson() {
+    public String getJson() {
         return json;
     }
 
-    public void setJson(Map<String, Integer> json) {
+    public void setJson(String json) {
         this.json = json;
     }
 }
