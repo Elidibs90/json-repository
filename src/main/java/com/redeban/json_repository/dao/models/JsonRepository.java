@@ -1,4 +1,4 @@
-package com.redeban.json_repository.dao;
+package com.redeban.json_repository.dao.models;
 
 import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -16,6 +16,7 @@ public class JsonRepository {
 
     private LocalDateTime fecha;
 
+    @Column(name = "json_information")
     @JdbcTypeCode(SqlTypes.JSON)
     private MyJson jsonProperty;
 

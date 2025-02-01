@@ -1,4 +1,4 @@
-package com.redeban.json_repository.dao;
+package com.redeban.json_repository.dao.models;
 
 import java.io.Serializable;
 
