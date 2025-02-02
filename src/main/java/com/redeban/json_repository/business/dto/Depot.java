@@ -1,5 +1,8 @@
 package com.redeban.json_repository.business.dto;
 
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import java.util.Date;
 
 public class Depot {
@@ -8,7 +11,7 @@ public class Depot {
 
     private Date date;
 
-    private String json;
+    private JsonNode json;
 
     public Long getId() {
         return id;
@@ -26,11 +29,11 @@ public class Depot {
         this.date = date;
     }
 
-    public String getJson() {
+    public JsonNode getJson() {
         return json;
     }
 
-    public void setJson(String json) {
+    public void setJson(JsonNode json) {
         this.json = json;
     }
 }

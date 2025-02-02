@@ -1,14 +1,12 @@
 package com.redeban.json_repository.dao.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.google.gson.*;
 import jakarta.persistence.*;
 
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 
 import java.util.Date;
@@ -18,7 +16,7 @@ import java.util.Date;
 public class JsonRepository {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -28,7 +26,8 @@ public class JsonRepository {
 
     @Column(name = "json_information")
     @JdbcTypeCode(SqlTypes.JSON)
-    private JsonObject jsonProperty;
+    private JsonNode jsonProperty;
+
 
     public Long getId() {
         return id;
@@ -46,17 +45,8 @@ public class JsonRepository {
         this.date = fecha;
     }
 
-    public JsonObject getJsonProperty() {
-        return jsonProperty;
-    }
 
-    public void setJsonProperty(JsonObject jsonProperty) {
-            this.jsonProperty = jsonProperty;
-
-    }
-
-
-    public boolean isValid(String json) {
+    /*public boolean isValid(String json) {
         try {
             new JSONObject(json);
         } catch (JSONException e) {
@@ -67,7 +57,22 @@ public class JsonRepository {
             }
         }
         return true;
+    }*/
+
+    public boolean isValid(String json) {
+        try {
+            JsonParser.parseString(json);
+        } catch (JsonSyntaxException e) {
+            return false;
+        }
+        return true;
     }
 
+    public JsonNode getJsonProperty() {
+        return jsonProperty;
+    }
 
+    public void setJsonProperty(JsonNode jsonProperty) {
+        this.jsonProperty = jsonProperty;
+    }
 }

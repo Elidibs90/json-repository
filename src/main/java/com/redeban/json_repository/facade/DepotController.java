@@ -20,7 +20,6 @@ public class DepotController {
     @PostMapping
     public ResponseEntity<Depot> addDepot(@RequestBody Depot depot) {
         Depot savedDepot= repositoryService.createDepot(depot);
-        System.out.println(savedDepot);
         return new ResponseEntity<>(savedDepot, HttpStatus.CREATED);
     }
 
