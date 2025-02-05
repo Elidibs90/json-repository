@@ -1,0 +1,39 @@
+{
+	"info": {
+		"_postman_id": "a874bde5-717e-447b-99ca-a220cd7fbddc",
+		"name": "DepotJson",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41536469"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \r\n  \"date\": \"2024-10-16\",\r\n  \"json\": \r\n    {\r\n      \"titulo\": \"Yo robot\",\r\n      \"isbn\": \"9780739312698\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8090/api/depot",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"depot"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
